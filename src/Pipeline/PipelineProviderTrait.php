@@ -5,14 +5,14 @@ namespace Rubicon\Collection\Pipeline;
 trait PipelineProviderTrait
 {
     /**
-     * @param callable[] $callbacks
+     * @param callable $callback
      *
      * @return PipelineInterface
      */
-    public function pipe(...$callbacks)
+    public function pipe(callable $callback)
     {
         $instance = $this;
-        foreach ($callbacks as $callback) {
+        foreach (func_get_args() as $callback) {
             $instance = new Pipeline($instance, $callback);
         }
 

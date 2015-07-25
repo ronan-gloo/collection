@@ -5,11 +5,13 @@ namespace Rubicon\Collection\Pipeline;
 interface PipelineInterface
 {
     /**
-     * @param callable[] $callbacks
+     * Pipe one or more callbacks
+     *
+     * @param callable $callback
      *
      * @return Pipeline
      */
-    public function pipe(...$callbacks);
+    public function pipe(callable $callback);
 
     /**
      * @return mixed
