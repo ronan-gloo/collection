@@ -1,4 +1,5 @@
 {
+  "name": "rubicon/collection",
   "require": {
     "php": ">=5.5"
   },
