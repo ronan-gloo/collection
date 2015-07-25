@@ -2,7 +2,7 @@
 
 namespace Rubicon\Collection\Constraint;
 
-class IsGreaterThan
+class IsLowerThan
 {
     /**
      * @var bool
