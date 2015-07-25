@@ -49,26 +49,10 @@ class CompositeConstraint
     }
 
     /**
-     * @return \callable[]
-     */
-    public function getConstraints()
-    {
-        return $this->constraints;
-    }
-
-    /**
      * @param callable $callable
      */
     public function add(callable $callable)
     {
         $this->constraints[] = $callable;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMode()
-    {
-        return $this->mode;
     }
 }
