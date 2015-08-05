@@ -2,6 +2,8 @@
 
 namespace Rubicon\Collection;
 
+use Rubicon\Collection\Exception\RuntimeException;
+
 class MutableCollection extends Collection implements MutableCollectionInterface
 {
     /**
@@ -110,5 +112,29 @@ class MutableCollection extends Collection implements MutableCollectionInterface
     public function toImmutable()
     {
         return new Collection($this->elements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (null === $offset) {
+            $this->add($value);
+        } else {
+            $this->set($offset, $value);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        if ($this->has($offset)) {
+            unset($this->elements[$offset]);
+        } else {
+            throw new RuntimeException('offset does not exists: ' . $offset);
+        }
     }
 }

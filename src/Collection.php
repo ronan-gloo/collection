@@ -2,10 +2,11 @@
 
 namespace Rubicon\Collection;
 
+use Rubicon\Collection\Exception\RuntimeException;
 use Rubicon\Collection\Pipeline\PipelineProviderTrait;
 use Rubicon\Collection\Validation\ValidationProviderTrait;
 
-class Collection implements CollectionInterface
+class Collection implements CollectionInterface, \ArrayAccess
 {
     use PipelineProviderTrait;
     use ValidationProviderTrait;
@@ -229,5 +230,37 @@ class Collection implements CollectionInterface
     public function count()
     {
         return count($this->elements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return $this->has($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        throw new RuntimeException(get_class($this) . ' is read-only');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        throw new RuntimeException(get_class($this) . ' is read-only');
     }
 }
