@@ -131,10 +131,6 @@ class MutableCollection extends Collection implements MutableCollectionInterface
      */
     public function offsetUnset($offset)
     {
-        if ($this->has($offset)) {
-            unset($this->elements[$offset]);
-        } else {
-            throw new RuntimeException('offset does not exists: ' . $offset);
-        }
+        $this->delete($offset);
     }
 }
