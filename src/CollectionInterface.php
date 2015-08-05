@@ -65,6 +65,20 @@ interface CollectionInterface extends \IteratorAggregate, \Countable
     public function reduce(callable $callable);
 
     /**
+     * Grab the first element of the collection
+     *
+     * @return mixed
+     */
+    public function first();
+
+    /**
+     * Grab the last element of the collection
+     *
+     * @return mixed
+     */
+    public function last();
+
+    /**
      * @param     $startOrLength
      * @param int $length
      *

@@ -166,4 +166,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             (new Collection(['one' => 1, 2]))->keys()->get()
         );
     }
+
+    public function testFirstAndLast()
+    {
+        $collection = new Collection([1, 2, 3]);
+        $this->assertSame(1, $collection->first());
+        $this->assertSame(3, $collection->last());
+    }
 }

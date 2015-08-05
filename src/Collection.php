@@ -127,6 +127,24 @@ class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
+    public function first()
+    {
+        $elements = $this->elements;
+        return reset($elements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function last()
+    {
+        $elements = $this->elements;
+        return end($elements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function take($startOrLength, $length = null)
     {
         if (null === $length) {
