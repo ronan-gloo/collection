@@ -45,7 +45,7 @@ class Collection implements CollectionInterface
     {
         $elements = array_map($callable, $this->elements);
 
-        return new static($elements);
+        return new self($elements);
     }
 
     /**
@@ -75,7 +75,7 @@ class Collection implements CollectionInterface
      */
     public function keys()
     {
-        return new static(array_keys($this->elements));
+        return new self(array_keys($this->elements));
     }
 
     /**
@@ -121,7 +121,7 @@ class Collection implements CollectionInterface
             $indexes[] = $index;
         }
 
-        return new static($indexes);
+        return new self($indexes);
     }
 
     /**
@@ -134,7 +134,7 @@ class Collection implements CollectionInterface
             $startOrLength = 0;
         }
 
-        return new static(array_slice($this->elements, $startOrLength, $length));
+        return new self(array_slice($this->elements, $startOrLength, $length));
     }
 
     /**
@@ -143,16 +143,16 @@ class Collection implements CollectionInterface
     public function filter(callable $callback = null, $flag = self::FILTER_VAL)
     {
         if (null === $callback) {
-            return new static(array_filter($this->elements));
+            return new self(array_filter($this->elements));
         }
         $elements = [];
         foreach ($this->elements as $key => $element) {
-            if (call_user_func($callback, (self::FILTER_KEY == $flag) ? $key : $element)) {
+            if (call_user_func($callback, (self::FILTER_KEY == $flag) ? $key : $element, $this)) {
                 $elements[$key] = $element;
             }
         }
 
-        return new static($elements);
+        return new self($elements);
     }
 
     /**
@@ -162,18 +162,18 @@ class Collection implements CollectionInterface
     {
         $elements = [];
         foreach ($this->elements as $key => $element) {
-            if (! call_user_func($callback, (self::FILTER_KEY == $flag) ? $key : $element)) {
+            if (! call_user_func($callback, (self::FILTER_KEY == $flag) ? $key : $element, $this)) {
                 $elements[$key] = $element;
             }
         }
 
-        return new static($elements);
+        return new self($elements);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function unique($callbackOrFlag = SORT_REGULAR)
+    public function distinct($callbackOrFlag = SORT_REGULAR)
     {
         if (is_numeric($callbackOrFlag)) {
             return new static(array_unique($this->elements, $callbackOrFlag));
@@ -185,14 +185,14 @@ class Collection implements CollectionInterface
         $elements = [];
         $indexes  = [];
         foreach ($this->elements as $key => $element) {
-            $index = call_user_func($callbackOrFlag, $element);
+            $index = call_user_func($callbackOrFlag, $element, $this);
             if (! in_array($index, $indexes, true)) {
                 $elements[$key] = $element;
                 $indexes[] = $index;
             }
         }
 
-        return new static($elements);
+        return new self($elements);
     }
 
     /**

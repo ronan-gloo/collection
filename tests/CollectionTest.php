@@ -94,17 +94,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $obj4->data = 'd';
 
         $collection = new Collection([$obj1, $obj2, $obj3, $obj4]);
-        $result = $collection->unique(function($obj){
+        $result = $collection->distinct(function($obj){
             return $obj->id;
         });
 
         $this->assertSame([0 => $obj1, 2 => $obj3, 3 => $obj4], $result->get(), 'uniqueness is based on strict callback value');
 
-        $result = $collection->unique();
+        $result = $collection->distinct();
         $this->assertSame([$obj1, $obj2, $obj3, $obj4], $result->get(), 'default flag is sort regular');
 
         $this->setExpectedException(\InvalidArgumentException::class);
-        $collection->unique('not valid argument');
+        $collection->distinct('not valid argument');
     }
 
     public function testFilter()

@@ -18,8 +18,6 @@ $obj3->data = '3';
 
 $collection = new Collection([$obj1, $obj2, $obj3]);
 
-print_r($collection->unique(function($obj) {
+print_r($collection->distinct(function($obj) {
     return $obj->id;
 }));
-
-print_r($collection->unique());

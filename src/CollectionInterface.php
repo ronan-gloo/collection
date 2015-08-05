@@ -97,5 +97,5 @@ interface CollectionInterface extends \IteratorAggregate, \Countable
      *
      * @return static
      */
-    public function unique($callbackOrFlag = SORT_STRING);
+    public function distinct($callbackOrFlag = SORT_STRING);
 }

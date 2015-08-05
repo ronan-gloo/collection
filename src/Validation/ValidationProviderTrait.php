@@ -76,7 +76,7 @@ trait ValidationProviderTrait
      */
     private function serializeElement($element)
     {
-        if (is_string($element)) {
+        if (is_scalar($element)) {
             return $element;
         }
         if (is_object($element)) {
