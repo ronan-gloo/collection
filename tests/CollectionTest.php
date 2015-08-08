@@ -23,13 +23,18 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         return is_int($val);
     }
 
+
+    public function testToArray()
+    {
+        $collection = new Collection();
+        $this->assertSame([], $collection->toArray());
+        $collection = new Collection($items = ['test' => 'me']);
+        $this->assertSame($items, $collection->toArray());
+    }
+
     public function testGet()
     {
-        $instance = new Collection();
-        $this->assertSame([], $instance->get());
-
         $instance = new Collection(['item' => 'data']);
-        $this->assertSame(['item' => 'data'], $instance->get());
         $this->assertSame('data', $instance->get('item'));
         $this->assertNull($instance->get('reference'));
     }
@@ -69,10 +74,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $result = $instance->take(2);
 
         $this->assertInstanceOf(Collection::class, $result);
-        $this->assertSame(['one' => 'one', 'two' => 'two'], $result->get());
+        $this->assertSame(['one' => 'one', 'two' => 'two'], $result->toArray());
 
         $result = $instance->take(1, 1);
-        $this->assertSame(['two' => 'two'], $result->get());
+        $this->assertSame(['two' => 'two'], $result->toArray());
     }
 
     public function testUnique()
@@ -98,10 +103,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             return $obj->id;
         });
 
-        $this->assertSame([0 => $obj1, 2 => $obj3, 3 => $obj4], $result->get(), 'uniqueness is based on strict callback value');
+        $this->assertSame([0 => $obj1, 2 => $obj3, 3 => $obj4], $result->toArray(), 'uniqueness is based on strict callback value');
 
         $result = $collection->distinct();
-        $this->assertSame([$obj1, $obj2, $obj3, $obj4], $result->get(), 'default flag is sort regular');
+        $this->assertSame([$obj1, $obj2, $obj3, $obj4], $result->toArray(), 'default flag is sort regular');
 
         $this->setExpectedException(\InvalidArgumentException::class);
         $collection->distinct('not valid argument');
@@ -113,7 +118,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             return $val === 1;
         });
 
-        $this->assertSame([1], $result->get());
+        $this->assertSame([1], $result->toArray());
     }
 
     public function testReject()
@@ -122,7 +127,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             return $val !== 1;
         });
 
-        $this->assertSame([1], $result->get());
+        $this->assertSame([1], $result->toArray());
     }
 
     public function testContains()
@@ -156,14 +161,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $collection = (new MutableCollection($elements))->toImmutable();
 
         $this->assertInstanceOf(Collection::class, $collection);
-        $this->assertSame($elements, $collection->get());
+        $this->assertSame($elements, $collection->toArray());
     }
 
     public function testGetKeys()
     {
         $this->assertSame(
             ['one', 0],
-            (new Collection(['one' => 1, 2]))->keys()->get()
+            (new Collection(['one' => 1, 2]))->keys()->toArray()
         );
     }
 

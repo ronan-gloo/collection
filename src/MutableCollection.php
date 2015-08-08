@@ -2,8 +2,6 @@
 
 namespace Rubicon\Collection;
 
-use Rubicon\Collection\Exception\RuntimeException;
-
 class MutableCollection extends Collection implements MutableCollectionInterface
 {
     /**

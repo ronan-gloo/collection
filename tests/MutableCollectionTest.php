@@ -43,7 +43,7 @@ class MutableCollectionTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->assertSame($this->instance, $this->instance->remove('val'));
-        $this->assertSame([3 => 'toto'], $this->instance->get());
+        $this->assertSame([3 => 'toto'], $this->instance->toArray());
     }
 
     public function testRemoveElementsNonStrict()
@@ -65,7 +65,7 @@ class MutableCollectionTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->assertSame($this->instance, $this->instance->delete(1));
-        $this->assertSame([0 => 'one'], $this->instance->get());
+        $this->assertSame([0 => 'one'], $this->instance->toArray());
     }
 
     public function testClearElements()
@@ -85,7 +85,7 @@ class MutableCollectionTest extends \PHPUnit_Framework_TestCase
             ->add(1)
             ->add('1')
             ->replace(1, 2)
-            ->get();
+            ->toArray();
 
         $this->assertSame([2, '1'], $result);
     }
@@ -96,15 +96,15 @@ class MutableCollectionTest extends \PHPUnit_Framework_TestCase
             ->add(1)
             ->add('1')
             ->replace(1, 2, false)
-            ->get();
+            ->toArray();
 
         $this->assertSame([2, 2], $result);
     }
 
     public function testExchangeWith()
     {
-        $this->assertSame([1, 2], $this->instance->exchangeWith([1, 2])->get());
-        $this->assertSame([1, 2], $this->instance->exchangeWith(new Collection([1, 2]))->get());
+        $this->assertSame([1, 2], $this->instance->exchangeWith([1, 2])->toArray());
+        $this->assertSame([1, 2], $this->instance->exchangeWith(new Collection([1, 2]))->toArray());
 
         $this->setExpectedException(ValidationException::class);
         $instance = new MutableCollection([], new IsTypeOf('string'));

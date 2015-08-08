@@ -8,11 +8,11 @@ interface CollectionInterface extends \IteratorAggregate, \Countable
     const FILTER_VAL = 0x02;
 
     /**
-     * @param mixed $reference
+     * @param mixed $key
      *
      * @return mixed
      */
-    public function get($reference = null);
+    public function get($key);
 
     /**
      * @param mixed $key
@@ -112,4 +112,11 @@ interface CollectionInterface extends \IteratorAggregate, \Countable
      * @return static
      */
     public function distinct($callbackOrFlag = SORT_STRING);
+
+    /**
+     * Return the internal array representation of data
+     *
+     * @return array
+     */
+    public function toArray();
 }

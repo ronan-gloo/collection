@@ -60,12 +60,8 @@ class Collection implements CollectionInterface, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function get($reference = null)
+    public function get($reference)
     {
-        if (! func_num_args()) {
-            return $this->elements;
-        }
-
         if (isset($this->elements[$reference])) {
             return $this->elements[$reference];
         }
@@ -212,6 +208,14 @@ class Collection implements CollectionInterface, \ArrayAccess
         }
 
         return new self($elements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        return $this->elements;
     }
 
     /**
