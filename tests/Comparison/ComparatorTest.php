@@ -3,6 +3,7 @@
 namespace Rubicon\Collection\Comparison;
 
 use Rubicon\Collection\Collection;
+use Rubicon\Collection\Exception\LogicException;
 use Rubicon\Collection\Exception\RuntimeException;
 use Rubicon\Collection\MutableCollection;
 
@@ -20,7 +21,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testCannotCompareTheSameCollection()
     {
-        $this->setExpectedException(RuntimeException::class);
+        $this->setExpectedException(LogicException::class);
         $collection = new Collection();
         $this->instance->compare($collection, $collection);
     }

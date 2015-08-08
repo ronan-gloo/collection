@@ -4,6 +4,7 @@ namespace Rubicon\Collection\Comparison;
 
 use Rubicon\Collection\Collection;
 use Rubicon\Collection\CollectionInterface;
+use Rubicon\Collection\Exception\LogicException;
 use Rubicon\Collection\Exception\RuntimeException;
 
 class Comparator implements ComparatorInterface
@@ -66,12 +67,12 @@ class Comparator implements ComparatorInterface
      * @param CollectionInterface $to
      *
      * @return ComparisonResult
-     * @throws RuntimeException
+     * @throws LogicException
      */
     public function compare(CollectionInterface $from, CollectionInterface $to)
     {
         if ($from === $to) {
-            throw new RuntimeException('Compared collections point to the same object');
+            throw new LogicException('Compared collections point to the same object: ' . spl_object_hash($from));
         }
 
         return new ComparisonResult(
