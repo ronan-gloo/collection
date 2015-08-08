@@ -27,7 +27,7 @@ class Diff implements DiffInterface
     /**
      * {@inheritdoc}
      */
-    public function getOriginal()
+    public function original()
     {
         return $this->original;
     }
@@ -35,7 +35,7 @@ class Diff implements DiffInterface
     /**
      * {@inheritdoc}
      */
-    public function getModified()
+    public function modified()
     {
         return $this->modified;
     }

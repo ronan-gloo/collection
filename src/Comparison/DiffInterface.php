@@ -7,10 +7,10 @@ interface DiffInterface
     /**
      * @return mixed
      */
-    public function getOriginal();
+    public function original();
 
     /**
      * @return mixed
      */
-    public function getModified();
+    public function modified();
 }
