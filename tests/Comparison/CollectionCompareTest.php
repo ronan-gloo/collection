@@ -1,8 +1,11 @@
 <?php
 
-namespace Rubicon\Collection;
+namespace Rubicon\Collection\Comparison;
 
+use Rubicon\Collection\Collection;
+use Rubicon\Collection\CollectionInterface;
 use Rubicon\Collection\Exception\RuntimeException;
+use Rubicon\Collection\MutableCollection;
 
 class CollectionCompareTest extends \PHPUnit_Framework_TestCase
 {

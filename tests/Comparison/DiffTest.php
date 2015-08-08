@@ -1,6 +1,6 @@
 <?php
 
-namespace Rubicon\Collection;
+namespace Rubicon\Collection\Comparison;
 
 class DiffTest extends \PHPUnit_Framework_TestCase
 {

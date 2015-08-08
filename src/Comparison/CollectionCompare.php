@@ -1,11 +1,17 @@
 <?php
 
-namespace Rubicon\Collection;
+namespace Rubicon\Collection\Comparison;
 
+use Rubicon\Collection\Collection;
+use Rubicon\Collection\CollectionInterface;
 use Rubicon\Collection\Exception\RuntimeException;
 
-class CollectionCompare
+class CollectionCompare implements CollectionCompareInterface
 {
+    const OPERATION_MODIFIED = 'modified';
+    const OPERATION_REMOVED  = 'removed';
+    const OPERATION_ADDED    = 'added';
+
     /**
      * @var CollectionInterface
      */
@@ -31,10 +37,7 @@ class CollectionCompare
     }
 
     /**
-     * Return an associative array of elements that are present in original collection,
-     * but removed from the modified one.
-     *
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getRemoved()
     {
@@ -48,10 +51,7 @@ class CollectionCompare
     }
 
     /**
-     * Return an associative array of elements that are present in both collection,
-     * but modified from the modified one.
-     *
-     * @return Collection   A collection of Diff objects
+     * {@inheritdoc}
      */
     public function getModified()
     {
@@ -65,10 +65,7 @@ class CollectionCompare
     }
 
     /**
-     * Return an associative array of elements that are present in modified collection,
-     * but not in the original one.
-     *
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getAdded()
     {
@@ -82,16 +79,16 @@ class CollectionCompare
     }
 
     /**
-     * Return all operations
+     * Return a collection for all operations
      *
-     * @return Collection|Collection[]
+     * @return CollectionInterface|CollectionInterface[]
      */
     public function getOperations()
     {
         return new Collection([
-            'removed'  => $this->getRemoved(),
-            'added'    => $this->getAdded(),
-            'modified' => $this->getModified(),
+            self::OPERATION_REMOVED  => $this->getRemoved(),
+            self::OPERATION_ADDED    => $this->getAdded(),
+            self::OPERATION_MODIFIED => $this->getModified(),
         ]);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Rubicon\Collection;
+namespace Rubicon\Collection\Comparison;
 
-class Diff
+class Diff implements DiffInterface
 {
     /**
      * @var mixed
@@ -25,7 +25,7 @@ class Diff
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getOriginal()
     {
@@ -33,7 +33,7 @@ class Diff
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getModified()
     {
