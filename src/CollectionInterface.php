@@ -2,7 +2,7 @@
 
 namespace Rubicon\Collection;
 
-interface CollectionInterface extends \IteratorAggregate, \Countable
+interface CollectionInterface extends Comparison\ComparableInterface, \IteratorAggregate, \Countable
 {
     const FILTER_KEY = 0x01;
     const FILTER_VAL = 0x02;

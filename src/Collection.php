@@ -2,6 +2,7 @@
 
 namespace Rubicon\Collection;
 
+use Rubicon\Collection\Comparison\ComparableTrait;
 use Rubicon\Collection\Exception\RuntimeException;
 use Rubicon\Collection\Pipeline\PipelineProviderTrait;
 use Rubicon\Collection\Validation\ValidationProviderTrait;
@@ -10,6 +11,7 @@ class Collection implements CollectionInterface, \ArrayAccess
 {
     use PipelineProviderTrait;
     use ValidationProviderTrait;
+    use ComparableTrait;
 
     /**
      * @var array
