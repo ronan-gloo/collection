@@ -139,7 +139,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testAgreggateIterator()
     {
-        $collection = new Collection([1, 2]);
+        $collection = new Collection(['test' => 1, 2]);
 
         $this->assertInstanceOf(\IteratorAggregate::class, $collection);
         $this->assertInstanceOf(\Generator::class, $collection->getIterator());

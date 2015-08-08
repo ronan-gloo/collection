@@ -223,8 +223,8 @@ class Collection implements CollectionInterface, \ArrayAccess
      */
     public function getIterator()
     {
-        foreach ($this->elements as $element) {
-            yield $element;
+        foreach ($this->elements as $key => $element) {
+            yield $key => $element;
         }
     }
 
